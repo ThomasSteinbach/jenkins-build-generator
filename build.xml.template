@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<build>
+  <queueId>QUEUE_ID</queueId>
+  <timestamp>TIMESTAMP</timestamp>
+  <startTime>START_TIME</startTime>
+  <result>RESULT</result>
+  <duration>DURATION</duration>
+  <charset>UTF-8</charset>
+</build>
