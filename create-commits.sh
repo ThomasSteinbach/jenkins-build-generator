@@ -3,10 +3,10 @@
 SCRIPT="`readlink -f "${BASH_SOURCE[0]}"`"
 SCRIPT_HOME="`dirname "$SCRIPT"`"
 
-# secconds passed since first commit (default 1 year)
-FIRST_BUILD_SINCE=${FIRST_BUILD_SINCE:-31536000}
-# seconds passed since last commit (default 0 / now)
-LAST_BUILD_SINCE=${LAST_BUILD_SINCE:-0}
+# default start Sun, 01 May 2016 00:00:00 GMT
+FIRST_BUILD=${FIRST_BUILD:-1462060800}
+# default end Mon, 31 Oct 2016 23:59:59 GMT
+LAST_BUILD=${LAST_BUILD:-1477958399}
 
 # minimum seconds till next commit (default 10)
 MIN_SHIFT=${MIN_SHIFT:-10}
@@ -25,16 +25,14 @@ CURRENT_TIME=$(date +%s)
 CURRENT_BUILD_NO=1
 
 # time stamp to use for every commit (will be modified in loop)
-FAKE_TIME_STAMP=$(($CURRENT_TIME - $FIRST_BUILD_SINCE))
-# max time for last commit (condition in loop)
-LAST_BUILD_TIME=$(($CURRENT_TIME - $LAST_BUILD_SINCE))
+FAKE_TIME_STAMP=$FIRST_BUILD
 
 FAKE_RESULT=(FAILURE SUCCESS)
 
 mkdir "/tmp/$CURRENT_TIME"
 cd "/tmp/$CURRENT_TIME"
 
-while [ $FAKE_TIME_STAMP -lt $LAST_BUILD_TIME ]
+while [ $FAKE_TIME_STAMP -lt $LAST_BUILD ]
 do
   mkdir $CURRENT_BUILD_NO
   cp "${SCRIPT_HOME}/build.xml.template" "${CURRENT_BUILD_NO}/build.xml"
